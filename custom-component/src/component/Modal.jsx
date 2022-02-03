@@ -1,14 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import Container from "./Container";
+import BodyBlackout from "./bodyBlackout";
 
-const Modal = ({ modalVisible, setModalVisible }) => (
-  <Container title="Modal" modalVisible={modalVisible}>
-    <ShowModalBtn onClick={() => setModalVisible(true)}>
+const Modal = ({ modalVisible, changeModalVisible }) => (
+  <Container title="Modal">
+    <BodyBlackout
+      modalVisible={modalVisible}
+      changeModalVisible={changeModalVisible}
+    />
+    <ShowModalBtn onClick={() => changeModalVisible(true)}>
       Open Modal
     </ShowModalBtn>
     <ModalWindow modalVisible={modalVisible}>
-      <CloseModalBtn onClick={() => setModalVisible(false)}>X</CloseModalBtn>
+      <CloseModalBtn onClick={() => changeModalVisible(false)}>X</CloseModalBtn>
       <Text>HELLO CODESTATES!</Text>
     </ModalWindow>
   </Container>
