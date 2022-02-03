@@ -1,0 +1,26 @@
+:root {
+  /*Colors*/
+  --first: #4900ce;
+  --black: #161212;
+  --white: #ffffff;
+  --grey: #a1a1a1;
+  --grey-background: #c5c5c5;
+  --shadow: #d1d1d1;
+
+  /*Font Weights*/
+  --bold: 500;
+  --bolder: 900;
+
+  /*Font Size*/
+  --normal: 0.9rem;
+  --small: 0.8rem;
+}
+* {
+  box-sizing: border-box;
+}
+input {
+  all: unset;
+}
+body {
+  font-size: var(--normal);
+}
