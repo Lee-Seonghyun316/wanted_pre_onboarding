@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Container from "./Container";
-import BodyBlackout from "./bodyBlackout";
+import BodyBlackout from "./BodyBlackout";
 
 const Modal = ({ modalVisible, changeModalVisible }) => (
   <Container title="Modal">
