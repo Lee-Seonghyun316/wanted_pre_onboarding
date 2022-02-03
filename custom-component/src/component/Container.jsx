@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-const Container = ({ title, children }) => (
-  <Wrap>
+const Container = ({ title, children, modalVisible }) => (
+  <Wrap modalVisible={modalVisible} onClick={onClick}>
     <Title>{title}</Title>
     {children}
   </Wrap>
@@ -19,12 +19,13 @@ const Wrap = styled.div`
   z-index: 0;
   border: 1px solid var(--grey-background);
   width: 70vw;
-  min-width: 200px;
+  min-width: 300px;
   height: 40vh;
   min-height: 150px;
   margin: 50px auto 0 auto;
   border-radius: 10px;
   box-shadow: 1px 1px 4px 0px var(--shadow);
+  background: ${(props) => props.modalVisible && "var(--light-grey)"};
 `;
 
 const Title = styled.h3`
