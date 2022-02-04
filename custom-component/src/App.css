@@ -6,6 +6,7 @@
   --grey: #a1a1a1;
   --light-grey: #adadad;
   --grey-background: #c5c5c5;
+  --bright-grey: #e0e0e0;
   --shadow: #d1d1d1;
 
   /*Font Weights*/
@@ -30,4 +31,11 @@ button {
   box-shadow: none;
   cursor: pointer;
   background: none;
+}
+ul {
+  list-style: none;
+  padding-left: 0px;
+}
+li {
+  list-style-type: none;
 }

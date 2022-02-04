@@ -4,10 +4,13 @@ import Toggle from "./component/Toggle";
 import Modal from "./component/Modal";
 import styled from "styled-components";
 import Tabs from "./component/Tabs";
+import Tag from "./component/Tag";
 
 function App() {
   const [checked, setChecked] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [tags, setTags] = useState(["CodeStates", "JJang"]);
+
   const changeModalVisible = (state) => {
     setModalVisible(state);
   };
@@ -19,6 +22,7 @@ function App() {
         changeModalVisible={changeModalVisible}
       />
       <Tabs />
+      <Tag tags={tags} setTags={setTags} />
     </Wrap>
   );
 }
