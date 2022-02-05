@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import styled from "styled-components";
 import Container from "./Container";
 import BodyBlackout from "./BodyBlackout";
@@ -6,21 +6,41 @@ import * as PropTypes from "prop-types";
 
 const Modal = ({ modalText }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleModalOpen = (state) => {
-    setIsModalOpen(state);
-  };
+  const modalRef = useRef(null);
+  const openButtonRef = useRef(null);
+  const handleModalClose = useCallback(() => {
+    setIsModalOpen(false);
+    window.setTimeout(() => openButtonRef.current.ref.current.focus());
+  }, []);
+  const handleModalOpen = useCallback(() => {
+    setIsModalOpen(true);
+    // 시간차를 두고 포커스 설정
+    window.setTimeout(() => modalRef.current.ref.current.focus());
+  }, []);
+
   return (
     <Container title="Modal">
       <BodyBlackout
         isModalOpen={isModalOpen}
-        handleModalClose={() => handleModalOpen(false)}
+        handleModalClose={handleModalClose}
       />
-      <ShowModalBtn onClick={() => handleModalOpen(true)}>
+      <ModalOpenButton
+        ref={openButtonRef}
+        onClick={handleModalOpen}
+        aria-haspopup="true"
+        aria-pressed={isModalOpen}
+      >
         Open Modal
-      </ShowModalBtn>
-      <ModalWindow modalVisible={isModalOpen}>
-        <CloseModalBtn onClick={() => handleModalOpen(false)}>X</CloseModalBtn>
-        <Text>{modalText}</Text>
+      </ModalOpenButton>
+      <ModalWindow
+        ref={modalRef}
+        modalVisible={isModalOpen}
+        role="dialog"
+        aria-labelledby="modal-jtw"
+        tabIndex="0"
+      >
+        <CloseModalBtn onClick={handleModalClose}>X</CloseModalBtn>
+        <Text id="modal-jtw">{modalText}</Text>
       </ModalWindow>
     </Container>
   );
@@ -32,7 +52,7 @@ Modal.propTypes = {
 
 export default Modal;
 
-const ShowModalBtn = styled.button`
+const ModalOpenButton = styled.button`
   width: 7rem;
   height: 3rem;
   border-radius: 2em;
