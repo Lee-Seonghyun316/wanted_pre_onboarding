@@ -4,7 +4,7 @@ import Toggle from "./component/Toggle";
 import Modal from "./component/Modal";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "./component/theme";
-import Tabs from "./component/Tabs";
+import Tab from "./component/Tab";
 import Tag from "./component/Tag";
 import AutoComplete from "./component/AutoComplete";
 
@@ -17,7 +17,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <Toggle checked={checked} setChecked={setChecked} />
         <Modal modalText={modalText} />
-        <Tabs />
+        <Tab />
         <Tag tags={tags} setTags={setTags} />
         <AutoComplete />
       </ThemeProvider>
