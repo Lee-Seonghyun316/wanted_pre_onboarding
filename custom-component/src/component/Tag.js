@@ -1,46 +1,53 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import Container from "./Container";
 
-const Tag = ({ tags, setTags }) => {
-  const removeTag = (i) => {
-    const newTags = [...tags];
-    newTags.splice(i, 1);
-    setTags(newTags);
+const Tag = () => {
+  const [tags, setTags] = useState([
+    { id: 1, tagText: "CodeStates" },
+    { id: 2, tagText: "JJang" },
+  ]);
+  const [text, setText] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleTagRemove = useCallback((id) => {
+    setTags((tags) => tags.filter((tag) => tag.id !== id));
+  }, []);
+
+  const handleChange = useCallback(
+    (e) => {
+      setText(e.target.value);
+    },
+    [text]
+  );
+
+  const handleSubmit = (e) => {
+    setTags((tags) => [...tags, { id: Date.now(), tagText: text }]);
+    setText("");
+    e.preventDefault();
   };
 
-  const inputKeyDown = (e) => {
-    const value = e.target.value;
-    if (e.key === "Enter" && value) {
-      setTags([...tags, value]);
-      inputRef.current.value = null;
-    } else if (e.key === "Backspace" && !value) {
-      removeTag(tags.length - 1);
-    }
-  };
-  const inputRef = useRef();
-  const [inputFocused, setInputFocused] = useState(false);
   return (
     <Container title="Tag">
-      <Wrap>
-        <TagList inputFocused={inputFocused}>
-          {tags.map((tag, i) => (
-            <TagElement key={i}>
-              {tag}
-              <DeleteBtn onClick={(i) => removeTag(i)}>+</DeleteBtn>
+      <Wrap inputFocused={isFocused}>
+        <TagList>
+          {tags.map(({ id, tagText }) => (
+            <TagElement key={id}>
+              {tagText}
+              <RemoveBtn onClick={() => handleTagRemove(id)}>+</RemoveBtn>
             </TagElement>
           ))}
-          <PlusTag>
-            <Input
-              type="text"
-              onKeyDown={inputKeyDown}
-              ref={inputRef}
-              placeholder="Press enter to add tags"
-              onFocus={() => setInputFocused(true)}
-              onBlur={() => setInputFocused(false)}
-            />
-          </PlusTag>
         </TagList>
+        <Form onSubmit={handleSubmit}>
+          <Input
+            type="text"
+            onChange={handleChange}
+            value={text}
+            placeholder="Press enter to add tags"
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+          />
+        </Form>
       </Wrap>
     </Container>
   );
@@ -48,49 +55,50 @@ const Tag = ({ tags, setTags }) => {
 
 export default Tag;
 
-const Wrap = styled.div``;
+const Wrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid ${({ theme }) => theme.colors.gray_4};
+  border-radius: 5px;
+  padding: 10px;
+  border-color: ${({ inputFocused, theme }) =>
+    inputFocused ? theme.colors.purple : theme.colors.gray_4};
+  gap: 10px;
+`;
 
 const TagList = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  margin: 0 10px;
-  border: 1px solid var(--bright-grey);
-  border-radius: 5px;
-  padding: 10px 10px 0 10px;
-  border-color: ${(props) =>
-    props.inputFocused ? "var(--first)" : "var(--bright-grey)"};
+  gap: 10px;
 `;
 
 const TagElement = styled.li`
   display: flex;
   align-items: center;
-  background: var(--first);
+  background-color: ${({ theme }) => theme.colors.purple};
   border-radius: 7px;
   padding: 5px;
-  color: var(--white);
-  margin-right: 10px;
+  color: ${({ theme }) => theme.colors.white};
   font-size: 13px;
-  margin-bottom: 10px;
 `;
 
-const DeleteBtn = styled.button`
-  background: var(--white);
+const RemoveBtn = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${({ theme }) => theme.colors.white};
   border-radius: 50%;
   transform: rotate(45deg);
   margin-left: 10px;
   height: 17px;
   width: 17px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
-const PlusTag = styled.li`
+const Form = styled.form`
   display: flex;
-  margin-bottom: 10px;
 `;
 
 const Input = styled.input`
-  font-weight: var(--bold);
-  color: var(--bright-grey);
+  font-weight: ${({ theme }) => theme.fontWeight.bold_500};
+  color: ${({ theme }) => theme.colors.gray_4};
 `;

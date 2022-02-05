@@ -11,14 +11,13 @@ import AutoComplete from "./component/AutoComplete";
 function App() {
   const [checked, setChecked] = useState(false);
   const modalText = "HELLO CODESTATES!";
-  const [tags, setTags] = useState(["CodeStates", "JJang"]);
   return (
     <Wrap>
       <ThemeProvider theme={theme}>
         <Toggle checked={checked} setChecked={setChecked} />
         <Modal modalText={modalText} />
         <Tab />
-        <Tag tags={tags} setTags={setTags} />
+        <Tag />
         <AutoComplete />
       </ThemeProvider>
     </Wrap>
