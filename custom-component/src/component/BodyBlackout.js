@@ -1,15 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import * as PropTypes from "prop-types";
 
-const BodyBlackout = ({ modalVisible, changeModalVisible }) => {
-  return (
-    <Wrap
-      modalVisible={modalVisible}
-      onClick={() => {
-        changeModalVisible(false);
-      }}
-    />
-  );
+const BodyBlackout = ({ isModalOpen, handleModalClose }) => {
+  return <Wrap isModalOpen={isModalOpen} onClick={handleModalClose} />;
+};
+
+BodyBlackout.propTypes = {
+  isModalOpen: PropTypes.bool,
+  handleModalClose: PropTypes.func,
 };
 
 export default BodyBlackout;
@@ -21,7 +20,7 @@ const Wrap = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--black);
+  background-color: ${({ theme }) => theme.colors.black};
   opacity: 0.4;
-  display: ${(props) => (props.modalVisible ? "block" : "none")};
+  display: ${({ isModalOpen }) => (isModalOpen ? "block" : "none")};
 `;

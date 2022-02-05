@@ -2,27 +2,25 @@ import React, { useState } from "react";
 import "./App.css";
 import Toggle from "./component/Toggle";
 import Modal from "./component/Modal";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
+import theme from "./component/theme";
 import Tabs from "./component/Tabs";
 import Tag from "./component/Tag";
+import AutoComplete from "./component/AutoComplete";
 
 function App() {
   const [checked, setChecked] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const modalText = "HELLO CODESTATES!";
   const [tags, setTags] = useState(["CodeStates", "JJang"]);
-
-  const changeModalVisible = (state) => {
-    setModalVisible(state);
-  };
   return (
-    <Wrap modalvisible={modalVisible}>
-      <Toggle checked={checked} setChecked={setChecked} />
-      <Modal
-        modalVisible={modalVisible}
-        changeModalVisible={changeModalVisible}
-      />
-      <Tabs />
-      <Tag tags={tags} setTags={setTags} />
+    <Wrap>
+      <ThemeProvider theme={theme}>
+        <Toggle checked={checked} setChecked={setChecked} />
+        <Modal modalText={modalText} />
+        <Tabs />
+        <Tag tags={tags} setTags={setTags} />
+        <AutoComplete />
+      </ThemeProvider>
     </Wrap>
   );
 }
