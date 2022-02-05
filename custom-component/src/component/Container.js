@@ -17,20 +17,21 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   z-index: 0;
-  border: 1px solid var(--grey-background);
+  border: 1px solid ${({ theme }) => theme.colors.gray_3};
   width: 70vw;
   min-width: 300px;
   height: 40vh;
   min-height: 150px;
   margin: 50px auto 0 auto;
   border-radius: 10px;
-  box-shadow: 1px 1px 4px 0px var(--shadow);
+  box-shadow: 1px 1px 4px 0px ${({ theme }) => theme.colors.gray_5};
 `;
 
-const Title = styled.h3`
+const Title = styled.h2`
   position: absolute;
   top: 10px;
   left: 10px;
   margin: 0;
-  font-weight: var(--bolder);
+  font-weight: ${({ theme }) => theme.fontWeight.bold_900};
+  font-size: 17px;
 `;
