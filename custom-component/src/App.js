@@ -9,12 +9,11 @@ import Tag from "./component/Tag";
 import AutoComplete from "./component/AutoComplete";
 
 function App() {
-  const [checked, setChecked] = useState(false);
   const modalText = "HELLO CODESTATES!";
   return (
     <Wrap>
       <ThemeProvider theme={theme}>
-        <Toggle checked={checked} setChecked={setChecked} />
+        <Toggle />
         <Modal modalText={modalText} />
         <Tab />
         <Tag />
