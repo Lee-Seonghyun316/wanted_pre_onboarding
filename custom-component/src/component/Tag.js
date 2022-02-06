@@ -14,18 +14,18 @@ const Tag = () => {
     setTags((tags) => tags.filter((tag) => tag.id !== id));
   }, []);
 
-  const handleChange = useCallback(
-    (e) => {
-      setText(e.target.value);
-    },
-    [text]
-  );
+  const handleChange = useCallback((e) => {
+    setText(e.target.value);
+  }, []);
 
-  const handleSubmit = (e) => {
-    setTags((tags) => [...tags, { id: Date.now(), tagText: text }]);
-    setText("");
-    e.preventDefault();
-  };
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      setTags((tags) => [...tags, { id: Date.now(), tagText: text }]);
+      setText("");
+    },
+    [tags, text]
+  );
 
   return (
     <Container title="Tag">
