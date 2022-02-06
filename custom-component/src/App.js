@@ -9,12 +9,11 @@ import Tag from "./component/Tag";
 import AutoComplete from "./component/AutoComplete";
 
 function App() {
-  const modalText = "HELLO CODESTATES!";
   return (
     <Wrap>
       <ThemeProvider theme={theme}>
         <Toggle />
-        <Modal modalText={modalText} />
+        <Modal />
         <Tab />
         <Tag />
         <AutoComplete />
