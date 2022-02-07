@@ -12,7 +12,6 @@ const Modal = () => {
   const handleClickClose = useCallback(() => {
     setIsModalOpen(true);
     setTimeout(() => modalRef.current.focus());
-    console.log(modalRef);
   }, []);
   const handleClickOpen = useCallback(() => {
     setIsModalOpen(false);
