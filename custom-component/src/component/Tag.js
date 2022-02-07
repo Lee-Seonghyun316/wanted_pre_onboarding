@@ -24,7 +24,7 @@ const Tag = () => {
       setTags((tags) => [...tags, { id: Date.now(), tagText: text }]);
       setText("");
     },
-    [tags, text]
+    [text]
   );
 
   return (
