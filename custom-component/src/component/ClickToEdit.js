@@ -9,56 +9,82 @@ const initialState = {
 
 const ClickToEdit = () => {
   const [inputs, setInputs] = useState(initialState);
-  const { name, age } = inputs;
-
   const [results, setResults] = useState({
-    nameResult: name,
-    ageResult: age,
+    nameResult: inputs.name,
+    ageResult: inputs.age,
   });
-  const { nameResult, ageResult } = results;
+  const [isEditable, setIsEditable] = useState({
+    nameEditable: false,
+    ageEditable: false,
+  });
 
-  const onChange = useCallback(
-    (e) => {
-      const { value, name } = e.target;
-      setInputs({
-        ...inputs,
-        [name]: value,
-      });
-    },
-    [inputs]
-  );
+  const handleChange = useCallback((e) => {
+    console.log(e);
+    const { value, name } = e.target;
+    setInputs((inputs) => ({
+      ...inputs,
+      [name]: value,
+    }));
+  }, []);
 
-  const handleBlur = useCallback(() => {
+  const handleBlur = () => {
     setResults({
-      nameResult: name,
-      ageResult: age,
+      nameResult: inputs.name,
+      ageResult: inputs.age,
     });
-  }, [name, age]);
+    setIsEditable({
+      nameEditable: false,
+      ageEditable: false,
+    });
+  };
+
+  const handleDoubleClick = useCallback((e) => {
+    const { id } = e.target;
+    setIsEditable((isEditable) => ({ ...isEditable, [id]: true }));
+  }, []);
 
   return (
-    <Container>
-      <Form>
-        <Label>
+    <Container title="ClickToEdit">
+      <InputContainer>
+        <label>
           이름
-          <Input
-            name="name"
-            value={name}
-            onChange={onChange}
-            onBlur={handleBlur}
-          />
-        </Label>
-        <Label>
+          {isEditable.nameEditable ? (
+            <Input
+              name="name"
+              value={inputs.name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          ) : (
+            <EditableTextArea
+              id="nameEditable"
+              onDoubleClick={handleDoubleClick}
+            >
+              {results.nameResult}
+            </EditableTextArea>
+          )}
+        </label>
+        <label>
           나이
-          <Input
-            name="age"
-            value={age}
-            onChange={onChange}
-            onBlur={handleBlur}
-          />
-        </Label>
-      </Form>
+          {isEditable.ageEditable ? (
+            <Input
+              name="age"
+              value={inputs.age}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          ) : (
+            <EditableTextArea
+              id="ageEditable"
+              onDoubleClick={handleDoubleClick}
+            >
+              {results.ageResult}
+            </EditableTextArea>
+          )}
+        </label>
+      </InputContainer>
       <Result>
-        이름 {nameResult} 나이 {ageResult}
+        이름 {results.nameResult} 나이 {results.ageResult}
       </Result>
     </Container>
   );
@@ -66,15 +92,22 @@ const ClickToEdit = () => {
 
 export default ClickToEdit;
 
-const Form = styled.form`
+const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const Label = styled.label``;
-
 const Input = styled.input`
+  width: 145px;
   all: revert;
+  padding: 5px;
+  margin: 15px 10px;
+  border: 1px solid ${({ theme }) => theme.colors.gray_3};
+`;
+
+const EditableTextArea = styled.div`
+  width: 157px;
+  display: inline-block;
   padding: 5px;
   margin: 15px 10px;
   border: 1px solid ${({ theme }) => theme.colors.gray_3};
