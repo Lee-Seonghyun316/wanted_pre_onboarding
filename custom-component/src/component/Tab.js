@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Container from "./Container";
 
-const TAB_WIDTH = 17;
+const TAB_WIDTH = 13;
 const tabsData = [
   {
     id: 1,
@@ -65,7 +65,8 @@ const NavItem = styled.div`
   height: 45px;
   line-height: 45px;
   vertical-align: middle;
-  text-align: center;
+  text-align: left;
+  padding-left: 5px;
   cursor: pointer;
   transition: color 0.15s ease-in;
   font-weight: ${({ theme }) => theme.fontWeight.bold_600};
