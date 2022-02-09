@@ -23,7 +23,7 @@ const Wrap = styled.div`
   max-width: 700px;
   height: 300px;
   min-height: 150px;
-  margin: 50px auto 0 auto;
+  margin: 50px auto;
   border-radius: 10px;
   box-shadow: 1px 1px 4px 0px ${({ theme }) => theme.colors.gray_5};
 `;
