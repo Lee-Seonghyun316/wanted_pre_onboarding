@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Container from "./Container";
 
-const TAB_WIDTH = 13;
+const TAB_WIDTH = 15;
 const tabsData = [
   {
     id: 1,
@@ -34,7 +34,6 @@ const Tab = () => {
               {title}
             </NavItem>
           ))}
-          <Glider currentIndex={currentIndex} />
         </Nav>
         {tabsData.map(({ content, id }, index) =>
           index === currentIndex ? (
@@ -49,7 +48,8 @@ const Tab = () => {
 export default Tab;
 
 const Wrap = styled.div`
-  width: calc(${TAB_WIDTH} * 3 * 1vw + ${TAB_WIDTH} * 0.4 * 1vw);
+  width: calc(${TAB_WIDTH} * 3 * 1.5vw + 2vw);
+  max-width: calc(${TAB_WIDTH} * 3 * 14px + 30px);
   margin: 20px auto 0;
 `;
 
@@ -57,36 +57,24 @@ const Nav = styled.nav`
   display: flex;
   position: relative;
   background-color: ${({ theme }) => theme.colors.gray_4};
-  justify-content: center;
+  justify-content: flex-end;
 `;
 
 const NavItem = styled.div`
-  width: calc(${TAB_WIDTH} * 1vw);
-  height: 45px;
-  line-height: 45px;
+  width: calc(${TAB_WIDTH} * 1.5vw);
+  max-width: calc(${TAB_WIDTH} * 14px);
   vertical-align: middle;
   text-align: left;
-  padding-left: 5px;
+  padding: 15px 5px;
   cursor: pointer;
   transition: color 0.15s ease-in;
-  font-weight: ${({ theme }) => theme.fontWeight.bold_600};
+  font-size: 0.9em;
+  font-weight: ${({ theme }) => theme.fontWeight.bold_700};
   color: ${({ index, currentIndex, theme }) =>
     index === currentIndex ? theme.colors.white : theme.colors.gray_1};
   z-index: 1000;
-`;
-
-const Glider = styled.span`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 45px;
-  width: calc(${TAB_WIDTH} * 1vw);
-  background-color: ${({ theme }) => theme.colors.purple};
-  transform: translate3D(
-    ${({ currentIndex }) => currentIndex * TAB_WIDTH + 0.2 * TAB_WIDTH}vw,
-    0,
-    0
-  );
+  background-color: ${({ index, currentIndex, theme }) =>
+    index === currentIndex ? theme.colors.purple : theme.colors.gray_4};
 `;
 
 const TabContent = styled.div`
