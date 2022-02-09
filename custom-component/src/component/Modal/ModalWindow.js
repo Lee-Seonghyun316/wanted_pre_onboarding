@@ -2,39 +2,37 @@ import React from "react";
 import styled from "styled-components";
 import * as PropTypes from "prop-types";
 
-const ModalWindow = ({
-  isModalOpen,
-  onModalClose,
-  modalRef,
-  modalText,
-}) => {
-  return (
-    <Wrap>
-      <BlackOut isModalOpen={isModalOpen} onClick={onModalClose} />
-      <ModalContent
-        ref={modalRef}
-        isModalOpen={isModalOpen}
-        role="dialog"
-        aria-labelledby="modal-jtw"
-        tabIndex="0"
-      >
-        <CloseModalBtn onClick={onModalClose}>X</CloseModalBtn>
-        <Text id="modal-jtw">{modalText}</Text>
-      </ModalContent>
-    </Wrap>
-  );
+const ModalWindow = ({ isModalOpen, onModalClose, modalText, modalRef }) => {
+    return (
+        <div>
+            <BlackOut isModalOpen={isModalOpen} onClick={onModalClose} />
+            <ModalContent
+                ref={modalRef}
+                isModalOpen={isModalOpen}
+                role="dialog"
+                aria-labelledby="modal-jtw"
+                tabIndex="0"
+            >
+                <CloseModalBtn onClick={onModalClose}>X</CloseModalBtn>
+                <Text id="modal-jtw">{modalText}</Text>
+            </ModalContent>
+        </div>
+    );
 };
 
 ModalWindow.propTypes = {
-  isModalOpen: PropTypes.bool,
-  onModalClose: PropTypes.func,
-  modalRef: PropTypes.object,
-  modalText: PropTypes.string,
+    isModalOpen: PropTypes.bool,
+    onModalClose: PropTypes.func,
+    modalText: PropTypes.string,
+};
+
+ModalWindow.defaultProps = {
+    isModalOpen: true,
+    onModalClose: undefined,
+    modalText: "HELLO CODESTATES!",
 };
 
 export default ModalWindow;
-
-const Wrap = styled.div``;
 
 const BlackOut = styled.div`
   position: absolute;

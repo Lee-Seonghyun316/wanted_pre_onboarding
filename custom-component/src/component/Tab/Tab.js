@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Container from "./Container";
+import Container from "../Container";
 
 const TAB_WIDTH = 15;
 const tabsData = [

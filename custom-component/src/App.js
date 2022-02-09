@@ -1,13 +1,13 @@
 import React from "react";
 import "./App.css";
-import Toggle from "./component/Toggle";
-import Modal from "./component/Modal";
+import Toggle from "./component/Toggle/Toggle";
+import Modal from "./component/Modal/Modal";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "./component/theme";
-import Tab from "./component/Tab";
-import Tag from "./component/Tag";
+import Tab from "./component/Tab/Tab";
+import Tag from "./component/Tag/Tag";
 import AutoComplete from "./component/AutoComplete/AutoComplete";
-import ClickToEdit from "./component/ClickToEdit";
+import ClickToEdit from "./component/ClickToEdit/ClickToEdit";
 
 function App() {
   return (

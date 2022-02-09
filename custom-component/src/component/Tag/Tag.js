@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import Container from "./Container";
+import Container from "../Container";
 
 const Tag = () => {
   const [tags, setTags] = useState([
