@@ -30,3 +30,16 @@ WithContainer.decorators = [
         </Container>
     ),
 ];
+
+Default.argTypes = {
+    onClickXBtn: {
+        table: {
+            disable: true,
+        },
+    },
+    onChange: {
+        table: {
+            disable: true,
+        },
+    },
+};

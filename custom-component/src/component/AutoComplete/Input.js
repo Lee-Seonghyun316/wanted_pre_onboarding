@@ -16,11 +16,15 @@ export default Input;
 Input.prototype = {
     isSuggestions: PropTypes.number,
     onClickXBtn: PropTypes.func,
+    value: PropTypes.array,
+    onChange: PropTypes.func,
 };
 
 Input.defaultProps = {
     isSuggestions: 0,
     onClickXBtn: undefined,
+    value: [],
+    onChange: undefined,
 };
 
 const InputContainer = styled.div`
