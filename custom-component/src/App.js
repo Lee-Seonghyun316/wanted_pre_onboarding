@@ -6,7 +6,7 @@ import styled, { ThemeProvider } from "styled-components";
 import theme from "./component/theme";
 import Tab from "./component/Tab";
 import Tag from "./component/Tag";
-import AutoComplete from "./component/AutoComplete";
+import AutoComplete from "./component/AutoComplete/AutoComplete";
 import ClickToEdit from "./component/ClickToEdit";
 
 function App() {
