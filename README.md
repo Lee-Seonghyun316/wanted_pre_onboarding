@@ -10,15 +10,11 @@ CSS는 styled-component를 사용하였습니다.
 git clone https://github.com/Lee-Seonghyun316/wanted_pre_onboarding.git
 ```
 2. wanted_pre_onboarding 폴더를 인터프린터나 컴파일러로 열기 
-3. 해당 폴더 경로의 터미널에서 아래 명령어를 이용해 custom-component 폴더로 이동
-```
-cd custom-component
-```
-4. 필요한 라이브러리 설치 
+3. 필요한 라이브러리 설치 
 ```
 npm install
 ```
-5. 실행
+4. 실행
 ```
 npm run start
 ```

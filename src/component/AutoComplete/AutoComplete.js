@@ -11,7 +11,6 @@ const autoItems = [
   { id: 4, text: "rustic" },
   { id: 5, text: "refurbished" },
 ];
-const { text } = [autoItems];
 
 const AutoComplete = () => {
   const [suggestions, setSuggestions] = useState([]);
@@ -22,7 +21,7 @@ const AutoComplete = () => {
         const regex = new RegExp(`${value}`, "i");
         setSuggestions(autoItems.filter(({ text }) => regex.test(text)));
       },
-      [autoItems, text]
+      []
   );
 
   const handleTextChange = useCallback((e) => {
@@ -33,12 +32,12 @@ const AutoComplete = () => {
       setSuggestions([]);
     }
     setInputText(value);
-  }, []);
+  }, [changeSuggestions]);
 
   const handleSelect = useCallback((value) => {
     setInputText(value);
     changeSuggestions(value);
-  }, []);
+  }, [changeSuggestions]);
 
   const handleXBtnClick = useCallback(() => {
     setInputText("");
