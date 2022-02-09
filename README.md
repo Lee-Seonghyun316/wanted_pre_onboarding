@@ -1,6 +1,6 @@
 ## Description
 
-원티드 프리온보딩 코스 지원을 목적으로 React에서 프로트엔드에서 자주 사용하는 컴포넌트 6가지(Toggle, Modal, Tab, Tag, AutoComplete, ClickToEdit)를 구현하였습니다.
+원티드 프리온보딩 코스 지원을 목적으로 React에서 프론트엔드에서 자주 사용하는 컴포넌트 6가지(Toggle, Modal, Tab, Tag, AutoComplete, ClickToEdit)를 구현하였습니다.
 
 CSS는 styled-component를 사용하였습니다.
 
@@ -21,13 +21,13 @@ npm install
 ```
 5. 실행
 ```
-npm start
+npm run start
 ```
 
 ## 구현한 방법과 이유에 대한 간략한 내용
 
 ### Toggle.js
-- 토글 버튼 클릭 시, after 가상요소인 동그라미가 오른쪽(ON) 또는 왼쪽(OFF)로 이동하면서 배경색이 이동방향대로 채워짐. 또한 하단의 토글 상태 text 내용이 현재 토글 상태에 따라 변경되도록 개발
+- 토글 버튼 클릭 시, after 가상요소인 토글 동그라미가 오른쪽(ON) 또는 왼쪽(OFF)로 이동하면서 배경색이 이동방향대로 채워짐. 또한 하단의 토글 상태 text 내용이 현재 토글 상태에 따라 변경되도록 개발.
 - useState 를 사용하여, checked  상태 값을 사용, 변경함. 
 - checkbox 로 만들었으며 체크 여부 유무에 따라 가상요소의 속성값을 변경하여 구현
 
@@ -63,10 +63,10 @@ npm start
 - 배열 함수 map 을 이용해 추천 단어 리스트 생성. 변경사항만 리랜더링 할 수 있도록 key 값에는 index 대신 id 속성을 부여함. 
 
 ### ClickToEdit.js
-- input 태그에 text를 입력하고 포커스아웃 되었을 때, 하단의 결과 문구가 변경되도록 구현.
-- useState로 여러개의 input 및 포커스 상태를 관리. 
-- onChange 함수는 evnet 객체 내의 name 값으로 현재 변경된 input 태그의 값을 변경. 
-- handleBlur 함수는 input 태그에 onBlur 이벤트가 발생했을 때, 현재 inputs 내 값으로 results 값을 변경. 
+- div 태그를 더블클릭 했을 때, isEditable 상태값을 true로 변경하고 div 태그를 input 태그로 변환하여 text 편집 가능. 또한 input 태그로부터 포커스아웃 되었을 때, inputText 값이 하단의 결과 문구에 반영되도록 구현.
+- useState로 여러개의 input 및 포커스, isEditable 상태를 관리. 
+- handleChange 함수는 evnet 객체 내의 name 값으로 현재 변경된 input 태그의 값을 변경. 
+- handleBlur 함수는 input 태그에 onBlur 이벤트(포커으 아웃)가 발생했을 때, 현재 inputs 값으로 results 값을 변경. 
 
 ### Theme.js
 - styled-component 에서 주로 사용할 컬러코드, fontWeight, fontSize 등을 객체로 반환하여 js 변수로 간단하게 사용.
@@ -80,10 +80,20 @@ npm start
 - 예시 gif 에는 토글버튼 배경색이 동그라미 이동방향에 따라 점점 채워졌는데, 처음에는 background 속성에만 집중에서 구현하다 보니까 제대로 구현하지 못했다. 기본 배경색을 회색으로 두고, 가상요소의 width, border-radius 및 배경색을 함께 변화시켜야 했는데, 여러번의 모니터링을 통해 자연스러운 transition을 가질 수 있는 속성값을 찾았다. 
 
 ### Modal.js
-- 과거에 모달을 개발했을 때, 웹 접근성에 대해 지적받은 적이 있어서 웹 접근성을 고려하여 사용자가 모달존재여부를 알 수 있도록 focus를 바꾸고 display 속성을 쓰지 않고 개발하려고 했다.  
+- 과거에 모달을 개발했을 때, 웹 접근성에 대해 지적받은 적이 있어서 웹 접근성을 고려하여 사용자가 모달존재여부를 알 수 있도록 모달 활성화 여부에 따라 focus를 바꾸고 display 속성을 쓰지 않고 개발하려고 했다. 처음에는 과거에 개발하던 방법과 다른 방법으로 하려고 하니 어려웠는데 웹 접근성에 대해 공부할 수 있는 계기가 된 것 같다. 
 
 ### Tab.js
-- 반응형으로 컴포넌트를 구현하려고 했는데, 고정값으로는 구현이 힘들어서 css 속성에 사칙연산이 많이 들어갔다. 원하는 대로 ui가 잘 그려지지 않아서 계속 모니터링하면서 시행착오를 겪었다.
+- 반응형으로 컴포넌트를 구현하려고 했는데, 고정값으로는 구현이 힘들어서 css 속성에 사칙연산이 많이 들어갔다. 원하는 대로 ui가 잘 그려지지 않아서 계속 모니터링하면서 시행착오를 겪었다. 
+- vh, vw 단위를 적극적으로 활용하고 max-width, min-height 등의 속성을 통해 다양한 환경에서도 ui 가 망가지지 않게 개발했다. 
+
+### Tag.js
+- 처음에는 input 에서 엔터keyPress 이벤트가 발생했을 때, 태그가 추가되는 함수를 만들었다. 코드 리팩토링을 하면서 고민해보았더니, 다른 key를 누르는 상황은 없었고 이후 Form 태그의 onSubmit 이벤트 발생 시 태그가 추가되는 함수로 변경했다. 
+
+### AutoComplete.js
+- AutoComplete 컴포넌트를 만드면서 많은 함수를 선언하게 되었는데, 성능에 대한 고민을 통해 useCallBack을 활용하여 함수 선언을 deps 변경 시점에만 할 수 있도록 리팩토링하였다. 
+
+### ClickToEdit.js
+- 해당 컴포넌트에 대한 이해가 부족해서 gif를 보고 처음에는 input 태그 2개를 두고 포커스 아웃되었을 때에만 결과에 반영되도록 만들었다. gif 를 자세히 보다보니 더블클릭 후 input 태그로 변경된다는 점을 발견했고 그제서야 ClickToEdit 이라는 이름을 이해하였다. 이후 div 태그를 더블클릭 했을 때, input 태그가 활성화되고, inputText를 변경할 수 있도록 컴포넌트를 수정하였다. 
 
 ### CSS
-- 처음에는 css 변수를 App.css 에 생성하여 사용하였는데, 태그에 props 를 받아서 사용해야 할 때, css 변수와 props를 같이 사용한 코드가 깔끔하지 못하고 js 변수를 사용할 수 있다는 styled-component 의 장점을 활용하지 못하고 있다는 생각이 들어서 theme.js 를 만들고 리팩토링을 진행하였다. 
+- 처음에는 css 변수를 App.css 에 생성하여 사용하였다. 그러나 태그에 props 를 받아서 사용해야 할 때, css 변수와 props를 같이 사용한 코드가 깔끔하지 못하고 js 변수를 사용할 수 있다는 styled-component 의 장점을 활용하지 못하고 있는 것 같아 theme.js 를 만들고 리팩토링을 진행하였다. 
