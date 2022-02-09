@@ -1,5 +1,4 @@
 ## Description
-
 원티드 프리온보딩 코스 지원을 목적으로 React에서 프론트엔드에서 자주 사용하는 컴포넌트 6가지(Toggle, Modal, Tab, Tag, AutoComplete, ClickToEdit)를 구현하였습니다.
 
 CSS는 styled-component를 사용하였습니다.
@@ -30,18 +29,21 @@ npm run start
 - 토글 버튼 클릭 시, after 가상요소인 토글 동그라미가 오른쪽(ON) 또는 왼쪽(OFF)로 이동하면서 배경색이 이동방향대로 채워짐. 또한 하단의 토글 상태 text 내용이 현재 토글 상태에 따라 변경되도록 개발.
 - useState 를 사용하여, checked  상태 값을 사용, 변경함. 
 - checkbox 로 만들었으며 체크 여부 유무에 따라 가상요소의 속성값을 변경하여 구현
+![Toggle](https://user-images.githubusercontent.com/70502670/153136099-b56429b1-9dc0-4985-bd68-71f952d12c7d.gif)
 
 ### Modal.js
 - Open Modal 버튼을 눌렀을 때, 모달창이 열리고 x 버튼이나 모달 외부 영역을 눌렀을 때 모달이 꺼지도록 개발. 
 - 모달창 활성화 여부는 useState 를 통해서 변경하고, dom 접근이 필요한 경우 useRef를 사용.
 - 모달창을 ModalWindow component 로 분리하여 필요한 값들을 Props 로 전달. ModalWindow.js에서는 각 props의 type을 지정.
 - 웹 접근성을 고려하여, 모달창이 열렸을 때는 모달창으로 모달창이 닫히면 다시 버튼으로 포커스를 이동. 사용자가 모달창의 존재 여부를 알 수 있도록, display 속성대신 opacity 와 pointer-events 속성값을 변경
+![Modal](https://user-images.githubusercontent.com/70502670/153136169-1e7b7766-6462-41e8-b543-0bd2adcf49d4.gif)
 
 ### Tab.js
 - 상단 nav 섹션의 tab 제목을 누르면 해당 탭 내용이 활성화.
 - 현재 선택된 탭의 index 상태는 useState 로 관리, 변경.
 - 배열 함수 map 을 이용해 각 상단 탭 항목 생성. 변경사항만 리랜더링 할 수 있도록 key 값에는 index 대신 id 속성을 부여함. 
 - 현재 선택된 탭이 아닐 경우에는 탭 내용이 랜더링되지 않도록 삼항 연산자를 통해 null 또는 태그를 반환하도록 함. 
+![Tab](https://user-images.githubusercontent.com/70502670/153136198-d01d5714-04f9-4d89-9963-8cf0d703b5c6.gif)
 
 ### Tag.js
 - input 값을 입력한 후 enter을 눌렀을 때, 새로운 태그가 생성. 태그의 x 버튼을 누르면 태그가 삭제되도록 구현.
@@ -51,6 +53,7 @@ npm run start
 - handleTagRemove 함수는 X 버튼을 눌렀을 해당 태그의 id 를 props 로 받아 배열함수 filter을 이용해 태그를 삭제. 
 - handleSubmit 함수는 input 태그에서 엔터 키를 눌렀을 때, 태그를 추가. 기존 form 이벤트를 없애기 위해서 e.preventDefault() 함수 사용.
 - 배열 함수 map 을 이용해 각각의 Tag 생성. 변경사항만 리랜더링 할 수 있도록 key 값에는 index 대신 id 속성을 부여함. 
+![Tag](https://user-images.githubusercontent.com/70502670/153136208-b6f230d4-28c7-41c3-9fb8-cdce3b3264ab.gif)
 
 ### AutoComplete.js
 - input 태그에 text 입력시 해당 글자가 포함된 추천 단어가 보이도록 구현.
@@ -61,12 +64,14 @@ npm run start
 - handleSeclect 는 추천 단어 리스트 중 하나가 선택되었을 때, inputText 및 inputText 상태를 변경. 
 - handleXBtnClick 함수는 X 버튼 클릭 시 inputText 값을 비우고, 추천단어 리스트를 초기화.
 - 배열 함수 map 을 이용해 추천 단어 리스트 생성. 변경사항만 리랜더링 할 수 있도록 key 값에는 index 대신 id 속성을 부여함. 
+![AutoComplete](https://user-images.githubusercontent.com/70502670/153136215-642a8c31-dfc3-43cd-baca-a1b06f621b5e.gif)
 
 ### ClickToEdit.js
 - div 태그를 더블클릭 했을 때, isEditable 상태값을 true로 변경하고 div 태그를 input 태그로 변환하여 text 편집 가능. 또한 input 태그로부터 포커스아웃 되었을 때, inputText 값이 하단의 결과 문구에 반영되도록 구현.
 - useState로 여러개의 input 및 포커스, isEditable 상태를 관리. 
 - handleChange 함수는 evnet 객체 내의 name 값으로 현재 변경된 input 태그의 값을 변경. 
 - handleBlur 함수는 input 태그에 onBlur 이벤트(포커으 아웃)가 발생했을 때, 현재 inputs 값으로 results 값을 변경. 
+![ClickToEdit](https://user-images.githubusercontent.com/70502670/153136223-d557c4c7-ea8c-449e-9227-1b8f291cce90.gif)
 
 ### Theme.js
 - styled-component 에서 주로 사용할 컬러코드, fontWeight, fontSize 등을 객체로 반환하여 js 변수로 간단하게 사용.
